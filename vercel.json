@@ -4,7 +4,7 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/github-workshop",
+      "destination": "/github-workshop-1",
       "permanent": false
     }
   ]
