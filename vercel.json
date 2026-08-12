@@ -4,7 +4,7 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/github-workshop-1",
+      "destination": "/copilot-dev-days",
       "permanent": false
     }
   ]
