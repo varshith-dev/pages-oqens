@@ -1,284 +1,570 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Copilot Dev Days</title>
-    <!-- SEO and Open Graph Meta Tags -->
-    <meta name="description" content="Join GitHub Copilot Dev Days. The future of AI-powered development.">
-    
-    <meta property="og:url" content="https://pages.oqens.me/copilot-dev-days/">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="GitHub Copilot Dev Days">
-    <meta property="og:description" content="Join GitHub Copilot Dev Days. The future of AI-powered development.">
-    <meta property="og:image" content="https://github.blog/wp-content/uploads/2023/11/Copilot-Header-2-1.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:type" content="image/png">
-    
-    <meta name="twitter:card" content="summary_large_image">
-    <!-- Clean minimal SVG Favicon (Code Brackets) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238534F3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='16 18 22 12 16 6'></polyline><polyline points='8 6 2 12 8 18'></polyline></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #0d1117;
-            --text-main: #c9d1d9;
-            --text-muted: #8b949e;
-            --border-color: #30363d;
-            --copilot-purple: #8534F3;
-            --copilot-blue: #3B82F6;
-            --font-main: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Copilot Dev Days</title>
+  <meta name="description" content="A hands-on event for developers ready to master AI-assisted coding with GitHub Copilot.">
+  <meta property="og:url" content="https://pages.oqens.me/copilot-dev-days/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="GitHub Copilot Dev Days">
+  <meta property="og:description" content="A hands-on event for developers ready to master AI-assisted coding with GitHub Copilot.">
+  <meta property="og:image" content="https://cdn.truvgo.me/Screenshot%202026-08-12%20195550.png?preview=true">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='16 18 22 12 16 6'></polyline><polyline points='8 6 2 12 8 18'></polyline></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-        body {
-            font-family: var(--font-main);
-            background-color: var(--bg-color);
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 48px 48px;
-            background-position: center top;
-            color: var(--text-main);
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* Purple Glow Effect */
-        .glow-bg {
-            position: absolute;
-            top: -20%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(133, 52, 243, 0.15) 0%, rgba(13, 17, 23, 0) 70%);
-            z-index: -1;
-            pointer-events: none;
-        }
+    :root {
+      --fg: #0a0a0a;
+      --fg-muted: #6b7280;
+      --fg-subtle: #9ca3af;
+      --bg: #ffffff;
+      --border: #e5e7eb;
+      --border-strong: #d1d5db;
+      --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+    html { scroll-behavior: smooth; }
 
-        nav {
-            padding: 24px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--fg);
+      -webkit-font-smoothing: antialiased;
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
 
-        .logo {
-            font-size: 16px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #ffffff;
-        }
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 100%;
+    }
 
-        .btn {
-            display: inline-block;
-            background-color: var(--copilot-purple);
-            color: #ffffff;
-            padding: 8px 16px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.2s ease;
-        }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--fg);
+      text-decoration: none;
+    }
 
-        .btn:hover {
-            background-color: #7227d8;
-            box-shadow: 0 0 15px rgba(133, 52, 243, 0.4);
-        }
+    .nav-logo svg { flex-shrink: 0; }
 
-        .btn-disabled {
-            background-color: #21262d;
-            color: #8b949e;
-            cursor: not-allowed;
-            border: 1px solid var(--border-color);
-        }
-        
-        .btn-disabled:hover {
-            background-color: #21262d;
-            box-shadow: none;
-        }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
 
-        .hero {
-            padding: 100px 0 60px;
-            text-align: center;
-        }
+    .tag {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--fg-muted);
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      padding: 4px 10px;
+      letter-spacing: 0.03em;
+    }
 
-        .hero-badge {
-            display: inline-block;
-            padding: 6px 14px;
-            background: rgba(133, 52, 243, 0.1);
-            border: 1px solid rgba(133, 52, 243, 0.3);
-            border-radius: 20px;
-            color: #b37af7;
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 24px;
-        }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--fg);
+      color: var(--bg);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 500;
+      border: none;
+      border-radius: 6px;
+      padding: 9px 18px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
 
-        .hero h1 {
-            font-size: 56px;
-            font-weight: 700;
-            color: #ffffff;
-            letter-spacing: -1.5px;
-            margin-bottom: 20px;
-            line-height: 1.1;
-        }
+    .btn:hover { opacity: 0.85; transform: translateY(-1px); }
 
-        .hero h1 span {
-            background: -webkit-linear-gradient(0deg, #8534F3, #3B82F6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    .btn-outline {
+      background: transparent;
+      color: var(--fg);
+      border: 1px solid var(--border-strong);
+    }
 
-        .hero p {
-            font-size: 20px;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
+    .btn-outline:hover { background: #f9fafb; }
 
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-            padding-bottom: 100px;
-        }
+    /* ─── HERO ─────────────────────────────────────────── */
+    .hero {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 88px 24px 60px;
+    }
 
-        @media(min-width: 768px) {
-            .grid { grid-template-columns: 1fr 1fr; }
-            .hero h1 { font-size: 72px; }
-        }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--fg-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
 
-        .card {
-            padding: 32px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            background: #161b22;
-            transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--copilot-purple), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+    .hero-eyebrow span {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
 
-        .card:hover::before {
-            opacity: 1;
-        }
+    .hero h1 {
+      font-size: clamp(40px, 7vw, 72px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -2.5px;
+      color: var(--fg);
+      margin-bottom: 24px;
+    }
 
-        .card:hover {
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(133, 52, 243, 0.1);
-            border-color: rgba(133, 52, 243, 0.4);
-            transform: translateY(-2px);
-        }
+    .hero p {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--fg-muted);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
 
-        .card.full { grid-column: 1 / -1; }
+    .hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 
-        .card-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(133, 52, 243, 0.1);
-            border: 1px solid rgba(133, 52, 243, 0.2);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
+    /* ─── BANNER ─────────────────────────────────────────── */
+    .banner-wrap {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
 
-        .card-icon svg {
-            fill: #b37af7;
-            width: 20px;
-            height: 20px;
-        }
+    .banner-wrap img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: block;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
 
-        .card h3 {
-            font-size: 20px;
-            color: #ffffff;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
+    /* ─── SECTION ─────────────────────────────────────────── */
+    section {
+      border-top: 1px solid var(--border);
+      padding: 72px 24px;
+      max-width: 840px;
+      margin: 0 auto;
+    }
 
-        .hero-img {
-            width: 100%;
-            max-width: 800px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            margin: 40px auto 0;
-            display: block;
-            box-shadow: 0 24px 48px rgba(0,0,0,0.5);
-        }
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+      margin-bottom: 40px;
+    }
 
-        /* Initial state for GSAP */
-        .gs-anim { opacity: 0; transform: translateY(20px); }
-    </style>
+    /* ─── DETAILS GRID ─────────────────────────────────────────── */
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .detail-cell {
+      background: #fff;
+      padding: 28px 32px;
+    }
+
+    .detail-cell:nth-child(3), .detail-cell:nth-child(4) {
+      border-top: 1px solid var(--border);
+    }
+
+    .detail-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+      margin-bottom: 10px;
+    }
+
+    .detail-value {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--fg);
+      line-height: 1.3;
+    }
+
+    .detail-sub {
+      font-size: 13px;
+      color: var(--fg-muted);
+      margin-top: 4px;
+    }
+
+    /* ─── TRACKS ─────────────────────────────────────────── */
+    .tracks-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .track-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s ease;
+    }
+
+    .track-item:last-child { border-bottom: none; }
+    .track-item:hover { background: #f9fafb; }
+
+    .track-left { display: flex; align-items: center; gap: 16px; }
+
+    .track-number {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--fg-subtle);
+      width: 20px;
+    }
+
+    .track-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--fg);
+    }
+
+    .track-badge {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--fg-muted);
+      background: #f3f4f6;
+      border-radius: 4px;
+      padding: 3px 8px;
+    }
+
+    /* ─── FORM ─────────────────────────────────────────── */
+    .form-wrap {
+      background: #f9fafb;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 40px;
+    }
+
+    .form-heading {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--fg);
+      margin-bottom: 6px;
+    }
+
+    .form-sub {
+      font-size: 14px;
+      color: var(--fg-muted);
+      margin-bottom: 28px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+    }
+
+    input, select {
+      font-family: var(--font);
+      font-size: 14px;
+      color: var(--fg);
+      background: #fff;
+      border: 1px solid var(--border-strong);
+      border-radius: 6px;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      width: 100%;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--fg);
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+    }
+
+    .form-submit {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .form-note {
+      font-size: 12px;
+      color: var(--fg-subtle);
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 840px;
+      margin: 0 auto;
+    }
+
+    .footer-left { font-size: 13px; color: var(--fg-muted); }
+    .footer-right { font-size: 13px; color: var(--fg-subtle); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .details-grid { grid-template-columns: 1fr; }
+      .detail-cell:nth-child(3), .detail-cell:nth-child(4) { border-top: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-submit { flex-direction: column; align-items: flex-start; }
+      .nav-right .tag { display: none; }
+    }
+
+    /* ─── GSAP initial states ─────────────────────────────────────────── */
+    .gs { opacity: 0; transform: translateY(16px); }
+  </style>
 </head>
 <body>
 
-    <div class="glow-bg"></div>
-
-    <div class="container">
-        <nav>
-            <div class="logo">
-                <svg height="24" viewBox="0 0 16 16" version="1.1" width="24"><path fill="#ffffff" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-                GitHub Copilot
-            </div>
-            <a href="#" class="btn btn-disabled">Registrations Opening Soon</a>
-        </nav>
-
-        <section class="hero gs-anim">
-            <div class="hero-badge">Upcoming Event</div>
-            <h1>Copilot <span>Dev Days</span></h1>
-            <p>Experience the next generation of AI-powered development. Discover how GitHub Copilot can transform your workflow.</p>
-            <a href="#" class="btn btn-disabled" style="padding: 12px 24px; font-size: 15px;">Registrations Opening Soon</a>
-            
-            <img src="https://github.blog/wp-content/uploads/2023/11/Copilot-Header-2-1.png" alt="GitHub Copilot" class="hero-img">
-        </section>
-
-        <section class="grid">
-            <div class="card full gs-anim">
-                <div class="card-icon">
-                    <svg viewBox="0 0 16 16"><path d="M4.75 0a.75.75 0 01.75.75V2h5V.75a.75.75 0 011.5 0V2h1.25c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0113.25 16H2.75A1.75 1.75 0 011 14.25V3.75C1 2.784 1.784 2 2.75 2H4V.75A.75.75 0 014.75 0zm0 3.5h8.5a.25.25 0 01.25.25V6h-11V3.75a.25.25 0 01.25-.25h2zm-2.25 4v6.75c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25V7.5h-11z"></path></svg>
-                </div>
-                <h3>Event Logistics</h3>
-                <p><strong>Date:</strong> Sept 10th - 20th (Tentative)</p>
-                <p><strong>Location:</strong> Online Event</p>
-                <p style="margin-top: 16px; color: var(--text-muted);">Stay tuned for detailed session schedules and technical track announcements.</p>
-            </div>
-        </section>
-
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <svg height="20" viewBox="0 0 16 16" width="20"><path fill="#0a0a0a" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+      Copilot Dev Days
+    </a>
+    <div class="nav-right">
+      <span class="tag">Sept 2026</span>
+      <a href="#register" class="btn" style="padding: 7px 16px; font-size: 13px;">Pre-Register</a>
     </div>
+  </nav>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script>
-        gsap.to(".gs-anim", {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "power3.out",
-            delay: 0.2
-        });
-    </script>
+  <!-- HERO -->
+  <div class="hero gs">
+    <div class="hero-eyebrow"><span></span> Upcoming · Sept 10 – 20, 2026</div>
+    <h1>GitHub Copilot<br>Dev Days.</h1>
+    <p>A hands-on event for developers ready to build faster, think smarter, and ship more with AI-native tooling.</p>
+    <div class="hero-actions">
+      <a href="#register" class="btn">Pre-Register — It's Free</a>
+      <a href="#what-to-expect" class="btn btn-outline">Learn more</a>
+    </div>
+  </div>
+
+  <!-- BANNER -->
+  <div class="banner-wrap gs">
+    <img
+      src="https://cdn.truvgo.me/Screenshot%202026-08-12%20195550.png?preview=true"
+      alt="GitHub Copilot Dev Days Banner"
+      loading="lazy"
+    >
+  </div>
+
+  <!-- EVENT DETAILS -->
+  <section id="what-to-expect" class="gs">
+    <div class="section-label">Event Details</div>
+    <div class="details-grid">
+      <div class="detail-cell">
+        <div class="detail-label">Dates</div>
+        <div class="detail-value">Sept 10 – 20</div>
+        <div class="detail-sub">2026 · Tentative</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Format</div>
+        <div class="detail-value">Online</div>
+        <div class="detail-sub">Attend from anywhere</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Cost</div>
+        <div class="detail-value">Free</div>
+        <div class="detail-sub">Open to all developers</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Certificate</div>
+        <div class="detail-value">Included</div>
+        <div class="detail-sub">Certificate of participation</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRACKS -->
+  <section id="tracks" class="gs">
+    <div class="section-label">What You'll Explore</div>
+    <div class="tracks-list">
+      <div class="track-item">
+        <div class="track-left">
+          <span class="track-number">01</span>
+          <span class="track-title">Getting started with GitHub Copilot</span>
+        </div>
+        <span class="track-badge">Fundamentals</span>
+      </div>
+      <div class="track-item">
+        <div class="track-left">
+          <span class="track-number">02</span>
+          <span class="track-title">AI-assisted code review &amp; refactoring</span>
+        </div>
+        <span class="track-badge">Intermediate</span>
+      </div>
+      <div class="track-item">
+        <div class="track-left">
+          <span class="track-number">03</span>
+          <span class="track-title">Copilot in the terminal &amp; CLI workflows</span>
+        </div>
+        <span class="track-badge">Hands-on</span>
+      </div>
+      <div class="track-item">
+        <div class="track-left">
+          <span class="track-number">04</span>
+          <span class="track-title">Building with Copilot Extensions</span>
+        </div>
+        <span class="track-badge">Advanced</span>
+      </div>
+      <div class="track-item">
+        <div class="track-left">
+          <span class="track-number">05</span>
+          <span class="track-title">Open-source contributions with AI</span>
+        </div>
+        <span class="track-badge">Community</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTER -->
+  <section id="register" class="gs">
+    <div class="section-label">Pre-Registration</div>
+    <div class="form-wrap">
+      <div class="form-heading">Reserve your spot.</div>
+      <div class="form-sub">We'll notify you the moment registrations open with full event details.</div>
+
+      <form id="preRegForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Varshith" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Chowdary" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="role">Your Role</label>
+            <select id="role" name="role">
+              <option value="">Select role</option>
+              <option>Student</option>
+              <option>Software Engineer</option>
+              <option>Tech Lead / Manager</option>
+              <option>Open-source Contributor</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn" id="submitBtn">Pre-Register Now →</button>
+          <span class="form-note">No spam. Unsubscribe any time.</span>
+        </div>
+      </form>
+
+      <div id="successMsg" style="display:none; padding: 20px 0;">
+        <p style="font-size:16px; font-weight:600; color:#16a34a;">✓ You're on the list.</p>
+        <p style="font-size:14px; color: var(--fg-muted); margin-top:6px;">We'll reach out as soon as registrations open. See you at Dev Days!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-left">GitHub Copilot Dev Days · 2026</span>
+    <span class="footer-right">Organized by Varshith Chowdary · MLSA</span>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Entrance animation
+    gsap.utils.toArray(".gs").forEach((el, i) => {
+      gsap.to(el, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: "power3.out",
+        delay: i < 2 ? i * 0.15 : 0,
+        scrollTrigger: i >= 2 ? {
+          trigger: el,
+          start: "top 88%",
+          once: true
+        } : null
+      });
+    });
+
+    // Form submit handler
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById("submitBtn");
+      btn.textContent = "Submitting…";
+      btn.disabled = true;
+
+      // Simulate submission (replace with real endpoint if needed)
+      setTimeout(() => {
+        document.getElementById("preRegForm").style.display = "none";
+        document.getElementById("successMsg").style.display = "block";
+      }, 800);
+    }
+  </script>
 </body>
 </html>
